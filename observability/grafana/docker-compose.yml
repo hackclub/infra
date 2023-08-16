@@ -1,0 +1,45 @@
+version: "3"
+services:
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    restart: always
+    networks:
+      - grafana-net
+    volumes:
+      - ./data/grafana/data:/var/lib/grafana
+      - ./data/grafana/datasources:/etc/grafana/provisioning/datasources
+      - ./data/grafana/dashboards:/etc/grafana/provisioning/dashboards
+    depends_on:
+      - graphite
+
+  graphite:
+    image: graphiteapp/graphite-statsd
+    container_name: graphite
+    restart: always
+    networks:
+      - grafana-net
+    ports:
+      - 8125:8125/udp
+      - 8126:8126
+      - 8080:8080
+    volumes:
+      - ./data/graphite/storage:/opt/graphite/storage
+      - ./data/graphite/log:/var/log/graphite
+
+  nginx:
+    image: nginx:latest
+    container_name: webserver
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./data/certs/:/ssl/
+    networks:
+      - grafana-net
+
+networks:
+  grafana-net:
+
