@@ -29,25 +29,24 @@ def login_required(f):
 def index():
     return Response("Yo", status=200)
 
-required_args = ["key", "type", "value"]
-@app.route("/upload", methods=["POST"])
+@app.route("/mtx", methods=["POST"])
 @login_required
-def upload():
+def mtx():
     args = request.args
-    key = args.get("key", None)
-    type = args.get("type", None)
-    value = args.get("value", None)
+    key = args.get("k", None)
+    typ = args.get("t", None)
+    value = args.get("v", None)
 
-    if key == None or type == None or value == None:
+    if key == None or typ == None or value == None:
         return Response("Must supply key, type, and value", status=400)
 
-    if type == "c":
+    if typ == "c":
         # Counter, integers
         metrics.incr(key, int(value))
-    elif type == "t":
+    elif typ == "t":
         # Time, milliseconds
         metrics.timer(key, int(value))
-    elif type == "g":
+    elif typ == "g":
         # Custom sampling - floating point
         metrics.gauge(key, value)
 
@@ -56,7 +55,7 @@ def upload():
 
 
 def start_server():
-    app.run(port=8080, debug=True, use_reloader=False)
+    app.run(host='0.0.0.0', port=8100, debug=True, use_reloader=False)
 
 threading.Thread(target=start_server).start()
 
