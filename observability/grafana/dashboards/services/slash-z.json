@@ -10,10 +10,10 @@
     "url": "/d/f3869cb3-1e23-4ff2-84b1-74f9d10cf535/slash-z",
     "expires": "0001-01-01T00:00:00Z",
     "created": "2023-08-10T14:53:16Z",
-    "updated": "2023-09-18T08:28:39Z",
-    "updatedBy": "admin",
+    "updated": "2023-09-22T20:36:02Z",
+    "updatedBy": "graham",
     "createdBy": "admin",
-    "version": 31,
+    "version": 32,
     "hasAcl": false,
     "isFolder": false,
     "folderId": 5,
@@ -108,7 +108,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -166,7 +167,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -291,7 +293,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -443,7 +446,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -554,7 +558,6 @@
           "type": "graphite",
           "uid": "e31ede16-e338-4187-87e8-b691427c60b1"
         },
-        "description": "The number of people active in a zoom call created by slashz",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -600,10 +603,11 @@
                 },
                 {
                   "color": "red",
-                  "value": 80
+                  "value": 50
                 }
               ]
-            }
+            },
+            "unit": "percent"
           },
           "overrides": []
         },
@@ -613,7 +617,7 @@
           "x": 15,
           "y": 8
         },
-        "id": 12,
+        "id": 2,
         "options": {
           "legend": {
             "calcs": [],
@@ -626,8 +630,38 @@
             "sort": "none"
           }
         },
-        "pluginVersion": "10.0.2",
         "targets": [
+          {
+            "datasource": {
+              "type": "graphite",
+              "uid": "e31ede16-e338-4187-87e8-b691427c60b1"
+            },
+            "hide": true,
+            "refCount": 0,
+            "refId": "A",
+            "target": "alias(stats.gauges.$env.slashz.hosts.total, 'total')"
+          },
+          {
+            "datasource": {
+              "type": "graphite",
+              "uid": "e31ede16-e338-4187-87e8-b691427c60b1"
+            },
+            "hide": true,
+            "refCount": 0,
+            "refId": "C",
+            "target": "alias(stats.gauges.$env.slashz.hosts.open, 'open')"
+          },
+          {
+            "datasource": {
+              "type": "graphite",
+              "uid": "e31ede16-e338-4187-87e8-b691427c60b1"
+            },
+            "hide": true,
+            "refCount": 0,
+            "refId": "D",
+            "target": "alias(diffSeries(#A, #C), 'used')",
+            "targetFull": "alias(diffSeries(alias(stats.gauges.$env.slashz.hosts.total, 'total'), alias(stats.gauges.$env.slashz.hosts.open, 'open')), 'used')"
+          },
           {
             "datasource": {
               "type": "graphite",
@@ -636,10 +670,11 @@
             "hide": false,
             "refCount": 0,
             "refId": "B",
-            "target": "stats.gauges.$env.slashz.app.active_users"
+            "target": "alias(asPercent(#D, #A), 'zoom license utilization %')",
+            "targetFull": "alias(asPercent(alias(diffSeries(alias(stats.gauges.$env.slashz.hosts.total, 'total'), alias(stats.gauges.$env.slashz.hosts.open, 'open')), 'used'), alias(stats.gauges.$env.slashz.hosts.total, 'total')), 'zoom license utilization %')"
           }
         ],
-        "title": "Active Users",
+        "title": "Zoom License Utilization (%)",
         "type": "timeseries"
       },
       {
@@ -687,7 +722,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -799,7 +835,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -859,7 +896,7 @@
               "axisLabel": "",
               "axisPlacement": "auto",
               "barAlignment": 0,
-              "drawStyle": "line",
+              "drawStyle": "bars",
               "fillOpacity": 0,
               "gradientMode": "none",
               "hideFrom": {
@@ -868,8 +905,8 @@
                 "viz": false
               },
               "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
+              "lineWidth": 3,
+              "pointSize": 0,
               "scaleDistribution": {
                 "type": "linear"
               },
@@ -888,15 +925,15 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
-                  "value": 50
+                  "value": 80
                 }
               ]
-            },
-            "unit": "percent"
+            }
           },
           "overrides": []
         },
@@ -906,7 +943,7 @@
           "x": 15,
           "y": 16
         },
-        "id": 2,
+        "id": 7,
         "options": {
           "legend": {
             "calcs": [],
@@ -925,45 +962,11 @@
               "type": "graphite",
               "uid": "e31ede16-e338-4187-87e8-b691427c60b1"
             },
-            "hide": true,
-            "refCount": 0,
             "refId": "A",
-            "target": "alias(stats.gauges.$env.slashz.hosts.total, 'total')"
-          },
-          {
-            "datasource": {
-              "type": "graphite",
-              "uid": "e31ede16-e338-4187-87e8-b691427c60b1"
-            },
-            "hide": true,
-            "refCount": 0,
-            "refId": "C",
-            "target": "alias(stats.gauges.$env.slashz.hosts.open, 'open')"
-          },
-          {
-            "datasource": {
-              "type": "graphite",
-              "uid": "e31ede16-e338-4187-87e8-b691427c60b1"
-            },
-            "hide": true,
-            "refCount": 0,
-            "refId": "D",
-            "target": "alias(diffSeries(#A, #C), 'used')",
-            "targetFull": "alias(diffSeries(alias(stats.gauges.$env.slashz.hosts.total, 'total'), alias(stats.gauges.$env.slashz.hosts.open, 'open')), 'used')"
-          },
-          {
-            "datasource": {
-              "type": "graphite",
-              "uid": "e31ede16-e338-4187-87e8-b691427c60b1"
-            },
-            "hide": false,
-            "refCount": 0,
-            "refId": "B",
-            "target": "alias(asPercent(#D, #A), 'zoom license utilization %')",
-            "targetFull": "alias(asPercent(alias(diffSeries(alias(stats.gauges.$env.slashz.hosts.total, 'total'), alias(stats.gauges.$env.slashz.hosts.open, 'open')), 'used'), alias(stats.gauges.$env.slashz.hosts.total, 'total')), 'zoom license utilization %')"
+            "target": "aliasByNode(stats.$env.slashz.error.*, 4)"
           }
         ],
-        "title": "Zoom License Utilization (%)",
+        "title": "All errors",
         "type": "timeseries"
       },
       {
@@ -1011,7 +1014,8 @@
               "mode": "absolute",
               "steps": [
                 {
-                  "color": "green"
+                  "color": "green",
+                  "value": null
                 },
                 {
                   "color": "red",
@@ -1253,94 +1257,6 @@
         ],
         "title": "HTTP error code ratios",
         "type": "piechart"
-      },
-      {
-        "datasource": {
-          "type": "graphite",
-          "uid": "e31ede16-e338-4187-87e8-b691427c60b1"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "bars",
-              "fillOpacity": 0,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 3,
-              "pointSize": 0,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green"
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 9,
-          "x": 15,
-          "y": 24
-        },
-        "id": 7,
-        "options": {
-          "legend": {
-            "calcs": [],
-            "displayMode": "list",
-            "placement": "bottom",
-            "showLegend": true
-          },
-          "tooltip": {
-            "mode": "single",
-            "sort": "none"
-          }
-        },
-        "targets": [
-          {
-            "datasource": {
-              "type": "graphite",
-              "uid": "e31ede16-e338-4187-87e8-b691427c60b1"
-            },
-            "refId": "A",
-            "target": "aliasByNode(stats.$env.slashz.error.*, 4)"
-          }
-        ],
-        "title": "All errors",
-        "type": "timeseries"
       }
     ],
     "refresh": "",
@@ -1389,7 +1305,7 @@
     "timezone": "",
     "title": "slash-z",
     "uid": "f3869cb3-1e23-4ff2-84b1-74f9d10cf535",
-    "version": 31,
+    "version": 32,
     "weekStart": ""
   }
 }

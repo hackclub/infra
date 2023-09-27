@@ -10,10 +10,10 @@
     "url": "/d/cf0fd2bf-efec-49a0-a879-a1a8c7e5a1b6/scrapbook",
     "expires": "0001-01-01T00:00:00Z",
     "created": "2023-09-19T13:31:35Z",
-    "updated": "2023-09-19T16:29:59Z",
+    "updated": "2023-09-21T09:25:28Z",
     "updatedBy": "admin",
     "createdBy": "admin",
-    "version": 6,
+    "version": 11,
     "hasAcl": false,
     "isFolder": false,
     "folderId": 5,
@@ -176,7 +176,7 @@
               "uid": "e31ede16-e338-4187-87e8-b691427c60b1"
             },
             "refId": "A",
-            "target": "groupByNode(stats.production.scrapbook.*.*, 3, 'average')"
+            "target": "groupByNode(stats.$environment.scrapbook.*.*, 3, 'average')"
           }
         ],
         "title": "Request HTTP Codes",
@@ -268,7 +268,7 @@
             "hide": true,
             "refCount": 0,
             "refId": "A",
-            "target": "sumSeries(stats.production.scrapbook.*.*)"
+            "target": "sumSeries(stats.$environment.scrapbook.*.*)"
           },
           {
             "datasource": {
@@ -278,7 +278,7 @@
             "hide": true,
             "refCount": 0,
             "refId": "B",
-            "target": "sumSeries(stats.production.scrapbook.200.*)"
+            "target": "sumSeries(stats.$environment.scrapbook.200.*)"
           },
           {
             "datasource": {
@@ -289,10 +289,100 @@
             "refCount": 0,
             "refId": "C",
             "target": "alias(transformNull(asPercent(#B, #A), 100), '% of successful traffic')",
-            "targetFull": "alias(transformNull(asPercent(sumSeries(stats.production.scrapbook.200.*), sumSeries(stats.production.scrapbook.*.*)), 100), '% of successful traffic')"
+            "targetFull": "alias(transformNull(asPercent(sumSeries(stats.$environment.scrapbook.200.*), sumSeries(stats.$environment.scrapbook.*.*)), 100), '% of successful traffic')"
           }
         ],
         "title": "Request HTTP Codes",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "graphite",
+          "uid": "e31ede16-e338-4187-87e8-b691427c60b1"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "dtdurationms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 12,
+          "w": 11,
+          "x": 0,
+          "y": 10
+        },
+        "id": 3,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "graphite",
+              "uid": "e31ede16-e338-4187-87e8-b691427c60b1"
+            },
+            "refId": "A",
+            "target": "aliasByNode(stats.timers.$environment.scrapbook.*.mean, 4)"
+          }
+        ],
+        "title": "API Endpoint Latencies",
         "type": "timeseries"
       }
     ],
@@ -301,7 +391,30 @@
     "style": "dark",
     "tags": [],
     "templating": {
-      "list": []
+      "list": [
+        {
+          "current": {
+            "selected": true,
+            "text": "production",
+            "value": "production"
+          },
+          "hide": 0,
+          "includeAll": false,
+          "multi": false,
+          "name": "environment",
+          "options": [
+            {
+              "selected": true,
+              "text": "production",
+              "value": "production"
+            }
+          ],
+          "query": "production",
+          "queryValue": "",
+          "skipUrlSync": false,
+          "type": "custom"
+        }
+      ]
     },
     "time": {
       "from": "now-6h",
@@ -311,7 +424,7 @@
     "timezone": "",
     "title": "scrapbook",
     "uid": "cf0fd2bf-efec-49a0-a879-a1a8c7e5a1b6",
-    "version": 6,
+    "version": 11,
     "weekStart": ""
   }
 }

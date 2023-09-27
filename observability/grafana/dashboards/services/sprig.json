@@ -1,0 +1,174 @@
+{
+  "meta": {
+    "type": "db",
+    "canSave": true,
+    "canEdit": true,
+    "canAdmin": false,
+    "canStar": true,
+    "canDelete": true,
+    "slug": "sprig",
+    "url": "/d/b7ac7960-a18f-4c83-a4e5-767d50ad62c7/sprig",
+    "expires": "0001-01-01T00:00:00Z",
+    "created": "2023-09-25T13:59:46Z",
+    "updated": "2023-09-26T12:40:57Z",
+    "updatedBy": "graham",
+    "createdBy": "josiasaurel",
+    "version": 4,
+    "hasAcl": false,
+    "isFolder": false,
+    "folderId": 5,
+    "folderUid": "e6407a04-f5f6-4e63-abac-a2985d78a4b1",
+    "folderTitle": "services",
+    "folderUrl": "/dashboards/f/e6407a04-f5f6-4e63-abac-a2985d78a4b1/services",
+    "provisioned": false,
+    "provisionedExternalId": "",
+    "annotationsPermissions": {
+      "dashboard": {
+        "canAdd": true,
+        "canEdit": true,
+        "canDelete": true
+      },
+      "organization": {
+        "canAdd": true,
+        "canEdit": true,
+        "canDelete": true
+      }
+    },
+    "publicDashboardAccessToken": "",
+    "publicDashboardUid": "",
+    "publicDashboardEnabled": false
+  },
+  "dashboard": {
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "description": "",
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 17,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+      {
+        "datasource": {
+          "type": "graphite",
+          "uid": "e31ede16-e338-4187-87e8-b691427c60b1"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 10,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        },
+        "id": 1,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "graphite",
+              "uid": "e31ede16-e338-4187-87e8-b691427c60b1"
+            },
+            "refId": "A",
+            "target": "aliasByNode(stats.production.sprig.*.*, 3, 4)"
+          }
+        ],
+        "title": "HTTP Requests",
+        "type": "timeseries"
+      }
+    ],
+    "refresh": "",
+    "schemaVersion": 38,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+      "list": []
+    },
+    "time": {
+      "from": "now-6h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "sprig",
+    "uid": "b7ac7960-a18f-4c83-a4e5-767d50ad62c7",
+    "version": 4,
+    "weekStart": ""
+  }
+}
