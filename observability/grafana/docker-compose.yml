@@ -22,10 +22,17 @@ services:
     ports:
       - 8125:8125/udp
       - 8126:8126
-      - 8080:8080
     volumes:
       - ./data/graphite/storage:/opt/graphite/storage
       - ./data/graphite/log:/var/log/graphite
+  
+  httpmetrics:
+    image: httpmetrics:latest
+    container_name: httpmetrics
+    networks:
+      - grafana-net
+    depends_on:
+      - graphite
 
   nginx:
     image: nginx:latest
