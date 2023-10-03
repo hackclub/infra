@@ -4,6 +4,9 @@ services:
     image: grafana/grafana
     container_name: grafana
     restart: always
+    environment:
+      - GF_SERVER_DOMAIN=telemetry.hackclub.com
+      - GF_SERVER_ROOT_URL=%(protocol)s://%(domain)s/
     networks:
       - grafana-net
     volumes:
