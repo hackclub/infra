@@ -2,7 +2,7 @@
 name: Create a repo
 about: This is a template for creating issues to track the creation of new hackclub
   github repositories.
-title: "[REPO CREATION] - "
+title: Repo creation request
 labels: ''
 assignees: grymmy
 
