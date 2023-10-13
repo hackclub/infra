@@ -9,4 +9,4 @@ assignees: grymmy
 
 What are you blocked by? <_please describe your issue, and why you need a specific action from a Github admin_>
 
-**Note - please limit your issue submissions to things that you very specifically need Github admin permissions.  This is not an open invitation**
+**Note - please limit your issue submissions to things that you very specifically need Github admin permissions.  This is, unfortunately, not an open invitation to debug your project...**
