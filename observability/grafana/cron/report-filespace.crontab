@@ -1,0 +1,2 @@
+* * * * * export BYTES=`df -P /dev/vda1 | awk 'NR==2 {print $4}'`; curl -k -X POST "https://telemetry.hackclub.com/mtx?k=production.grafana.free_disk_space_bytes&t=g&v=$BYTES" --user hackclub:23f0jjf9j923jf2j9239u298 --verbose
+

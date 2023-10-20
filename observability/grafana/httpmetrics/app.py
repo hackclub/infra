@@ -48,9 +48,8 @@ def mtx():
         metrics.timer(key, int(value))
     elif typ == "g":
         # Custom sampling - floating point
-        metrics.gauge(key, value)
+        metrics.gauge(key, float(value))
 
-    metrics.incr(key, value)
     return Response(status=200)
 
 
