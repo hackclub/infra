@@ -30,7 +30,7 @@ services:
       - ./data/graphite/log:/var/log/graphite
   
   httpmetrics:
-    image: httpmetrics:latest
+    build: ./httpmetrics
     container_name: httpmetrics
     networks:
       - grafana-net
@@ -46,7 +46,7 @@ services:
       - 443:443
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
-      - ./data/certs/:/ssl/
+      - ./data/certs:/ssl/
     networks:
       - grafana-net
 

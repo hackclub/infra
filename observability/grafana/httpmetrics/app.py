@@ -41,16 +41,18 @@ def mtx():
         return Response("Must supply key, type, and value", status=400)
 
     if typ == "c":
-        # Counter, integers
-        metrics.incr(key, int(value))
+        # Counters, floating-point OK
+        metrics.incr(key, float(value))
     elif typ == "t":
         # Time, milliseconds
         metrics.timer(key, int(value))
     elif typ == "g":
         # Custom sampling - floating point
-        metrics.gauge(key, value)
+        metrics.gauge(key, float(value))
 
-    metrics.incr(key, value)
+    #print("key: " + key)
+    #print("value: " + value)
+
     return Response(status=200)
 
 
