@@ -10,7 +10,7 @@ total_defective_repos = 0
 
 es = Elasticsearch(
     ['https://localhost:9200'],
-    http_auth=('elastic', 'please_change_me'),
+    http_auth=('elastic', 'change_me_please'),
     verify_certs=False
 )
 
