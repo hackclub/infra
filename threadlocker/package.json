@@ -1,0 +1,19 @@
+{
+  "name": "ctexp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@prisma/client": "5.12.1",
+    "@sentry/node": "^7.110.0",
+    "@sentry/profiling-node": "^7.110.0",
+    "@slack/bolt": "^3.17.1",
+    "dotenv": "^16.4.5"
+  },
+  "scripts": {
+    "dev": "nodemon"
+  },
+  "devDependencies": {
+    "prisma": "5.12.1"
+  }
+}
