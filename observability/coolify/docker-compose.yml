@@ -2,16 +2,17 @@ version: '3.8'
 
 services:
   prometheus:
-    image: prom/prometheus
+    build: .
     container_name: prometheus
-    volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
     ports:
       - "9999:9090"
     depends_on:
       - cadvisor
       - node-exporter
-
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      
   node-exporter:
     image: prom/node-exporter:latest
     container_name: node-exporter
