@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   prometheus:
-    build: .
+    build: ./prometheus
     container_name: prometheus
     ports:
       - "9999:9090"
