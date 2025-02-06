@@ -4,6 +4,8 @@ services:
   prometheus:
     build: ./prometheus
     container_name: prometheus
+    volumes:
+      - /mnt/persistent-prometheus-telemetry:/prometheus
     ports:
       - "9999:9090"
     depends_on:
@@ -12,6 +14,9 @@ services:
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"
       - "--storage.tsdb.path=/prometheus"
+      - "--storage.tsdb.retention.time=28d"
+      - "--storage.tsdb.retention.size=0"
+    user: "1000:1000"
     deploy:
       resources:
         limits:
