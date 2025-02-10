@@ -31,7 +31,7 @@ services:
     container_name: node-exporter
     restart: unless-stopped
     ports:
-      - "9100"
+      - "9998:9100"
     networks:
       - monitoring
     command:
@@ -56,7 +56,7 @@ services:
     container_name: cadvisor
     restart: unless-stopped
     ports:
-      - "8080"
+      - "9997:8080"
     networks:
       - monitoring
     volumes:
