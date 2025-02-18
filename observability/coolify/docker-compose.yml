@@ -23,8 +23,8 @@ services:
           cpus: '2'
           memory: '4G'
         reservations:
-          cpus: '0.5'
-          memory: '2G'
+          cpus: '2'
+          memory: '4G'
 
   node-exporter:
     image: prom/node-exporter:latest
